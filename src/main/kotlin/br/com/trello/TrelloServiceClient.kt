@@ -1,4 +1,4 @@
-package br.com.trello.trello
+package br.com.trello
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.springframework.web.client.RestTemplate
