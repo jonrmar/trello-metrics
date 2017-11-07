@@ -1,4 +1,4 @@
-package br.com.trello.metrics
+package br.com.metrics
 
 interface Metrics {
     fun calculate()
