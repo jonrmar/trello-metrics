@@ -14,8 +14,8 @@ class BugCreatedMetric : Metric{
     }
 
     private fun countBugCards(cards: List<Card>): Int{
-        val cardsFiltered = cards.filter { it.name.contains("BUG") }
+        val bugCard = cards.filter { it.name.contains("BUG") }
 
-        return cardsFiltered.count()
+        return bugCard.count()
     }
 }
