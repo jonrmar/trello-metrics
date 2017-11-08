@@ -1,22 +1,22 @@
 package br.com.trello
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.core.ParameterizedTypeReference
-import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
 import org.springframework.http.RequestEntity
 import org.springframework.web.client.RestTemplate
 import java.net.URI
 import java.util.*
 
-class TrelloServiceClient(var restClient: RestTemplate,
-                          var apiKey: String,
-                          var token: String) {
+class TrelloServiceClient(private var apiKey: String,
+                          private var token: String) {
+
+    private val restClient: RestTemplate =  RestTemplate()
+    private val trelloUrl : String = "https://api.trello.com/1"
 
     fun getUserInfo(): Optional<User>{
         try {
-            val response = restClient.getForEntity("https://api.trello.com/1/members/me?fields=all&key=${apiKey}&token=${token}", User::class.java)
+            val response = restClient.getForEntity("${trelloUrl}/members/me?fields=all&key=${apiKey}&token=${token}", User::class.java)
             return Optional.of(response.body)
         }
         catch (ex: org.jsoup.HttpStatusException){
@@ -26,7 +26,7 @@ class TrelloServiceClient(var restClient: RestTemplate,
 
     fun getCardActions(cardId: String): Optional<List<CardAction>>{
         try {
-            val request = RequestEntity<Any>(HttpMethod.GET, URI.create("https://api.trello.com/1/cards/${cardId}/actions?fields=all&key=${apiKey}&token=${token}"))
+            val request = RequestEntity<Any>(HttpMethod.GET, URI.create("${trelloUrl}/cards/${cardId}/actions?fields=all&key=${apiKey}&token=${token}"))
             val respType = object: ParameterizedTypeReference<List<CardAction>>(){}
 
             val response = restClient.exchange(request, respType)
@@ -39,7 +39,7 @@ class TrelloServiceClient(var restClient: RestTemplate,
 
     fun getBoardInfo(cardId: String): Optional<List<Card>>{
         try {
-            val request = RequestEntity<Any>(HttpMethod.GET, URI.create("https://api.trello.com/1/boards/${cardId}/cards?fields=all&key=${apiKey}&token=${token}"))
+            val request = RequestEntity<Any>(HttpMethod.GET, URI.create("${trelloUrl}/boards/${cardId}/cards?fields=all&key=${apiKey}&token=${token}"))
             val respType = object: ParameterizedTypeReference<List<Card>>(){}
 
             val response = restClient.exchange(request, respType)
