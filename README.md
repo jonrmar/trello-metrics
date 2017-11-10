@@ -11,7 +11,7 @@ Project implemented in Kotlin to get metrics from your boards on [Trello](https:
 ```
 3. Execute jar file:
 ```
-java -jar build/libs/trello-metrics-0.1.0.jar -apiKey: {{TRELLO_API_KEY}}  -token: {{TRELLO_TOKEN}}
+java -jar build/libs/trello-metrics-0.1.0.jar -apiKey: {{TRELLO_API_KEY}}  -token: {{TRELLO_TOKEN}} -idBoard: {{BOARD_ID}}
 ```
 4. Choose metrics from options:
 * At this time, this project has implemented: Created bugs metric - that specify how many bugs were created in the board.

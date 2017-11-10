@@ -6,7 +6,7 @@ import br.com.trello.TrelloServiceClient
 class BugCreatedMetric : Metric{
 
     override fun calculate(args: Array<String>): Int {
-        val cards = TrelloServiceClient(args[1], args[3]).getBoardInfo(args[7])
+        val cards = TrelloServiceClient(args[1], args[3]).getBoardInfo(args[5])
 
         if(!cards.isPresent()) return 0
 
