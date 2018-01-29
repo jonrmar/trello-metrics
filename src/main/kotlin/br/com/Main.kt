@@ -13,23 +13,9 @@ object Main {
     fun main(args : Array<String>){
         val metricFactory = MetricFactory()
 
-        chooseMetricOption()
-        val option: String? = readLine()
-        val metric: Metric = metricFactory.getMetric(option)
+        val metric: Metric = metricFactory.getMetric("1")
 
-        choosePrintOption()
-        val strategy: PrinterStrategy? = strategies.find { it.type() == readLine()?.toInt()}
+        val strategy: PrinterStrategy? = strategies.find { it.type() == 1}
         strategy?.print(metric.calculate(args).toString())
     }
-
-    private fun chooseMetricOption(){
-        println("Type in the console the metric number:")
-        println("1- Bug Count")
-    }
-
-    private fun choosePrintOption(){
-        println("Type in the console the print number:")
-        println("1- Console")
-    }
-
 }
