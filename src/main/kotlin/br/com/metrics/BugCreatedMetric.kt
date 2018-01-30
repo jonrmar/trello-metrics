@@ -1,7 +1,6 @@
 package br.com.metrics
 
 import br.com.trello.Card
-import br.com.trello.Label
 import br.com.trello.TrelloServiceClient
 import java.time.Instant
 import java.time.LocalDate

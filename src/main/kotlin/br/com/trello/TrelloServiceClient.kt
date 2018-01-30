@@ -61,6 +61,18 @@ class TrelloServiceClient(private var apiKey: String,
             return Optional.empty<List<TrelloList>>()
         }
     }
+
+    fun getCardsFromList(listId: String): Optional<List<Card>> {
+        try {
+            val request = RequestEntity<Any>(HttpMethod.GET, URI.create("${trelloUrl}/lists/${listId}/cards?fields=all&key=${apiKey}&token=${token}"))
+            val respType = object : ParameterizedTypeReference<List<Card>>() {}
+
+            val response = restClient.exchange(request, respType)
+            return Optional.of(response.body)
+        } catch (ex: org.jsoup.HttpStatusException) {
+            return Optional.empty<List<Card>>()
+        }
+    }
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
