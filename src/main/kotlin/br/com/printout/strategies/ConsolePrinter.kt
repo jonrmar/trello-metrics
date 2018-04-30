@@ -9,7 +9,6 @@ class ConsolePrinter : PrinterStrategy {
     }
 
     override fun print(text: String) {
-        println("Metric result:")
         println(text)
     }
 }
